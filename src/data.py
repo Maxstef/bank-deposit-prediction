@@ -117,3 +117,12 @@ def split_train_val(
         df, test_size=test_size, random_state=random_state, stratify=stratify_vals
     )
     return train_df, val_df
+
+
+def split_X_y(train_df, val_df, target_col):
+    X_train = train_df.drop(target_col, axis=1)
+    X_val = val_df.drop(target_col, axis=1)
+    y_train = train_df[target_col]
+    y_val = val_df[target_col]
+
+    return X_train, X_val, y_train, y_val

@@ -74,13 +74,17 @@ def build_feature_engineering_pipeline(
                 ]
             ),
         ),
-        (
-            "pdays_transform",
-            PdaysTransformer(
-                mode=pdays_transform_mode, recent_days=pdays_transform_recent_days
-            ),
-        ),
     ]
+
+    if "pdays" not in drop_cols:
+        steps.append(
+            (
+                "pdays_transform",
+                PdaysTransformer(
+                    mode=pdays_transform_mode, recent_days=pdays_transform_recent_days
+                ),
+            )
+        )
 
     # Calendar numeric mapping
     if calendar_cols_mode != "onehot":
