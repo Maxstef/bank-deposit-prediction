@@ -76,14 +76,17 @@ def build_feature_engineering_pipeline(
         ),
     ]
 
-    if "pdays" not in drop_cols:
-        steps.append(
-            (
-                "pdays_transform",
-                PdaysTransformer(
-                    mode=pdays_transform_mode, recent_days=pdays_transform_recent_days
+    if pdays_transform_mode in ["binary", "group"] and "pdays" not in drop_cols:
+        steps.extend(
+            [
+                (
+                    "pdays_transform",
+                    PdaysTransformer(
+                        mode=pdays_transform_mode, recent_days=pdays_transform_recent_days
+                    ),
                 ),
-            )
+                ("pdays_drop", ColumnDropper(columns=["pdays"])),
+            ]
         )
 
     # Calendar numeric mapping
@@ -199,7 +202,7 @@ def build_pipeline(
     drop_cols=None,
     campaign_prev_subtract_value=1,
     campaign_prev_cap_value=5,
-    pdays_transform_mode="group",
+    pdays_transform_mode=None,
     pdays_transform_recent_days=7,
     soceco_bin_cols=None,
     age_bin_mode=None,

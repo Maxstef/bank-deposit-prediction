@@ -142,7 +142,7 @@ def objective_xgb(
         random_state=42,
         eval_metric="logloss",
     )
-    pipeline = build_pipeline(drop_cols=drop_cols, model=model)
+    pipeline = build_pipeline(drop_cols=drop_cols, pdays_transform_mode="group", model=model)
     pipeline.fit(X_train, y_train_bin)
 
     y_val_pred = pipeline.predict(X_val)
