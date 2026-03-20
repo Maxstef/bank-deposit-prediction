@@ -10,6 +10,7 @@ Original data come from the site [UCI Machine Learning Repository]
 - Perform feature engineering
 - Train multiple binary classification models
 - Evaluate models using standard metrics (ROC-AUC, precision, recall)
+- Analyse models features importance, predictions and mistakes
 ## 4. Project structure
 ```
 ml-bank-additional-project/

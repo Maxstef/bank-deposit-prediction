@@ -82,7 +82,8 @@ def build_feature_engineering_pipeline(
                 (
                     "pdays_transform",
                     PdaysTransformer(
-                        mode=pdays_transform_mode, recent_days=pdays_transform_recent_days
+                        mode=pdays_transform_mode,
+                        recent_days=pdays_transform_recent_days,
                     ),
                 ),
                 ("pdays_drop", ColumnDropper(columns=["pdays"])),
