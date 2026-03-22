@@ -96,3 +96,89 @@ def plot_shap_comparison(shap_rf, shap_xgb, shap_lr, max_display=15):
 
     plt.tight_layout()
     plt.show()
+
+
+def get_shap_per_confusion_matrix(y_true, y_pred, X_subset, shap_values):
+    # --- Align predictions ---
+    y_pred = pd.Series(y_pred, index=y_true.index)
+
+    # --- Confusion groups ---
+    tp_idx = y_true[(y_true == "yes") & (y_pred == "yes")].index
+    fp_idx = y_true[(y_true == "no") & (y_pred == "yes")].index
+    tn_idx = y_true[(y_true == "no") & (y_pred == "no")].index
+    fn_idx = y_true[(y_true == "yes") & (y_pred == "no")].index
+
+    # --- Map index → position ---
+    index_to_pos = {idx: pos for pos, idx in enumerate(X_subset.index)}
+
+    def to_pos(indices):
+        return [index_to_pos[i] for i in indices]
+
+    tp_pos = to_pos(tp_idx)
+    fp_pos = to_pos(fp_idx)
+    tn_pos = to_pos(tn_idx)
+    fn_pos = to_pos(fn_idx)
+
+    # --- Handle SHAP shape ---
+    def extract_shap(pos, class_idx=1):
+        if len(shap_values.values.shape) == 3:
+            return shap_values.values[pos, :, class_idx]
+        else:
+            return shap_values.values[pos]
+
+    def extract_base(pos, class_idx=1):
+        if len(np.array(shap_values.base_values).shape) == 2:
+            return shap_values.base_values[pos, class_idx]
+        else:
+            return shap_values.base_values[pos]
+
+    # --- Extract ---
+    result = {
+        "tp": {"pos": tp_pos},
+        "fp": {"pos": fp_pos},
+        "tn": {"pos": tn_pos},
+        "fn": {"pos": fn_pos},
+    }
+
+    for key in result:
+        pos = result[key]["pos"]
+        result[key]["shap"] = extract_shap(pos)
+        result[key]["base"] = extract_base(pos)
+
+    # --- Debug counts ---
+    # print({k: len(v["pos"]) for k, v in result.items()})
+
+    return result
+
+
+def get_common_indexes(y_true, preds_dict, true_value="yes", pred_value="yes"):
+    """
+    Find indices where ALL models agree on a given condition.
+
+    preds_dict: dict like {
+        "rf": y_pred_rf,
+        "xgb": y_pred_xgb,
+        "lr": y_pred_lr
+    }
+    """
+
+    index_sets = []
+
+    for model_name, y_pred in preds_dict.items():
+        y_pred_series = pd.Series(y_pred, index=y_true.index)
+
+        idx = set(y_true[(y_true == true_value) & (y_pred_series == pred_value)].index)
+
+        index_sets.append(idx)
+
+    # intersection across all models
+    common_idx = set.intersection(*index_sets)
+
+    return list(common_idx)
+
+
+def get_single_explanation(shap_values, pos, class_idx=1):
+    if len(shap_values.values.shape) == 3:
+        return shap_values[pos, :, class_idx]
+    else:
+        return shap_values[pos]
