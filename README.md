@@ -97,7 +97,7 @@ All experiments, intermediate findings, and detailed explanations are documented
 
    ```bash
    git clone https://github.com/Maxstef/bank-deposit-prediction.git
-   cd ml-bank-additional-project
+   cd bank-deposit-prediction
    ```
 
 2. 🧪 **Create a virtual environment** (recommended python version - 3.11.11):
