@@ -27,7 +27,7 @@
 ## 4. Project structure
 
 ```
-ml-bank-additional-project/
+bank-deposit-prediction/
 │
 ├── README.md                # 📄 Project overview and instructions
 ├── requirements.txt         # 📦 Python dependencies
@@ -58,11 +58,11 @@ ml-bank-additional-project/
 
 All experiments, intermediate findings, and detailed explanations are documented in the project notebooks:
 
-* 📊 **EDA, initial hypotheses, and metric selection** – [`notebooks/01_eda.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/01_eda.ipynb)
-* 🧹 **Data preprocessing and feature engineering** – [`notebooks/02_preprocessing.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/02_preprocessing.ipynb)
-* 🤖 **Model training and comparison** – [`notebooks/03_modeling.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/03_modeling.ipynb)
-* 🧠 **Feature importance, SHAP, and error analysis** – [`notebooks/04_model_analysis.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/04_model_analysis.ipynb)
-* ⚖️ **Class imbalance handling experiments** – [`notebooks/05_class_imbalance.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/05_class_imbalance.ipynb)
+* 📊 **EDA, initial hypotheses, and metric selection** – [`notebooks/01_eda.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/01_eda.ipynb)
+* 🧹 **Data preprocessing and feature engineering** – [`notebooks/02_preprocessing.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/02_preprocessing.ipynb)
+* 🤖 **Model training and comparison** – [`notebooks/03_modeling.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/03_modeling.ipynb)
+* 🧠 **Feature importance, SHAP, and error analysis** – [`notebooks/04_model_analysis.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/04_model_analysis.ipynb)
+* ⚖️ **Class imbalance handling experiments** – [`notebooks/05_class_imbalance.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/05_class_imbalance.ipynb)
 
 📦 Dataset source: [Kaggle](https://www.kaggle.com/datasets/sahistapatel96/bankadditionalfullcsv) (originally from UCI Machine Learning Repository).
 
@@ -78,7 +78,7 @@ All experiments, intermediate findings, and detailed explanations are documented
 | Logistic Regression | 0.507         | 0.801            | 0.484    | 0.792       |
 | KNN                 | 0.406         | 0.744            | 0.491    | 0.919       |
 
-🔗 More details: [`notebooks/03_modeling.ipynb`](https://github.com/Maxstef/ml-bank-additional-project/blob/main/notebooks/03_modeling.ipynb)
+🔗 More details: [`notebooks/03_modeling.ipynb`](https://github.com/Maxstef/bank-deposit-prediction/blob/main/notebooks/03_modeling.ipynb)
 
 ### 📌 Key Outcomes
 
@@ -96,7 +96,7 @@ All experiments, intermediate findings, and detailed explanations are documented
 1. 📥 **Clone the repository**
 
    ```bash
-   git clone https://github.com/Maxstef/ml-bank-additional-project.git
+   git clone https://github.com/Maxstef/bank-deposit-prediction.git
    cd ml-bank-additional-project
    ```
 
